@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import "./App.css";
+import TestButton from "./components/TestButton";
 
 function App() {
   //login
@@ -55,6 +56,7 @@ function App() {
       <p>os: {os}</p>
       <p>id: {id}</p>
       <p>name: {name}</p>
+      <TestButton />
     </div>
   );
 }

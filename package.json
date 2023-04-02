@@ -1,14 +1,19 @@
 {
   "name": "legacy-alice-liff",
   "version": "0.0.0",
-  "private":"false",
+  "private": "false",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
     "@line/liff": "2.22.0",
+    "@mantine/core": "^6.0.5",
+    "@mantine/dates": "^6.0.5",
+    "@mantine/hooks": "^6.0.5",
+    "dayjs": "^1.11.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
