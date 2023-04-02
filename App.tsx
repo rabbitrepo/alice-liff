@@ -3,39 +3,58 @@ import liff from "@line/liff";
 import "./App.css";
 
 function App() {
-  const [message, setMessage] = useState("");
+  //login
+  const [init, setInit] = useState(false);
   const [error, setError] = useState("");
+
+  const [os, setOS] = useState("");
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+
+  // async function getOS() {
+  //   const userOS = await liff.getOS();
+  //   setOS(userOS);
+  // }
+
+  // async function getProfile() {
+  //   const userProfile = await liff.getProfile();
+  //   setProfile(userProfile);
+  // }
 
   useEffect(() => {
     liff
       .init({
-        liffId: import.meta.env.VITE_LIFF_ID
+        liffId: import.meta.env.VITE_LIFF_ID,
       })
       .then(() => {
-        setMessage("LIFF init succeeded.");
+        setInit(true);
       })
       .catch((e: Error) => {
-        setMessage("LIFF init failed.");
         setError(`${e}`);
       });
+  }, []);
+
+  useEffect(() => {
+    liff.ready.then(() => {
+      // getOS();
+      setOS(liff.getOS());
+
+      liff.getProfile().then((profile) => {
+        const userId = profile.userId;
+        const displayName = profile.displayName;
+        setId(userId);
+        setName(displayName);
+      });
+    });
   });
 
   return (
     <div className="App">
       <h1>create-liff-app</h1>
-      {message && <p>{message}</p>}
-      {error && (
-        <p>
-          <code>{error}</code>
-        </p>
-      )}
-      <a
-        href="https://developers.line.biz/ja/docs/liff/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        LIFF Documentation
-      </a>
+      <p>init: {init.toString()}</p>
+      <p>os: {os}</p>
+      <p>id: {id}</p>
+      <p>name: {name}</p>
     </div>
   );
 }
